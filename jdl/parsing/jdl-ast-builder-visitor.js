@@ -191,7 +191,6 @@ module.exports = class JDLAstBuilderVisitor extends BaseJDLCSTVisitor {
       });
     }
 
-  console.log("jdl-ast-builder-visitor.js :" + context.NAME[0].image + "="+ this.visit(context.fieldColumnNameDeclaration));
     let columnName = '';
     if (context.fieldColumnNameDeclaration) {
       columnName = this.visit(context.fieldColumnNameDeclaration);
