@@ -43,6 +43,7 @@ module.exports = class JDLParser extends CstParser {
     this.entityTableNameDeclaration();
     this.entityBody();
     this.fieldDeclaration();
+    this.fieldColumnNameDeclaration();
     this.type();
     this.validation();
     this.minMaxValidation();
@@ -190,6 +191,11 @@ module.exports = class JDLParser extends CstParser {
       });
 
       this.CONSUME(LexerTokens.NAME);
+      
+      this.OPTION1(() => {
+        this.SUBRULE(this.fieldColumnNameDeclaration);
+      });
+      
       this.SUBRULE(this.type);
       this.MANY1(() => {
         this.SUBRULE(this.validation);
@@ -206,6 +212,14 @@ module.exports = class JDLParser extends CstParser {
           this.CONSUME2(LexerTokens.JAVADOC);
         },
       });
+    });
+  }
+  
+  fieldColumnNameDeclaration() {
+    this.RULE('fieldColumnNameDeclaration', () => {
+      this.CONSUME(LexerTokens.LPAREN);
+      this.CONSUME(LexerTokens.NAME);
+      this.CONSUME(LexerTokens.RPAREN);
     });
   }
 

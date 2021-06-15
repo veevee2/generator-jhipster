@@ -172,6 +172,10 @@ module.exports = class JDLAstBuilderVisitor extends BaseJDLCSTVisitor {
     return context.NAME[0].image;
   }
 
+  fieldColumnNameDeclaration(context) {
+	return context.NAME[0].image;
+  }
+
   entityBody(context) {
     if (!context.fieldDeclaration) {
       return [];
@@ -187,6 +191,11 @@ module.exports = class JDLAstBuilderVisitor extends BaseJDLCSTVisitor {
       });
     }
 
+  console.log("jdl-ast-builder-visitor.js :" + context.NAME[0].image + "="+ this.visit(context.fieldColumnNameDeclaration));
+    let columnName = '';
+    if (context.fieldColumnNameDeclaration) {
+      columnName = this.visit(context.fieldColumnNameDeclaration);
+    }   
     // filter actual comment as the comment rule may be empty
     const comment = context.JAVADOC ? trimComment(context.JAVADOC[0].image) : null;
 
@@ -197,6 +206,7 @@ module.exports = class JDLAstBuilderVisitor extends BaseJDLCSTVisitor {
 
     return {
       name: context.NAME[0].image,
+      columnName,
       // context.type is an array with a single item.
       // in that case:
       // this.visit(context.type) is equivalent to this.visit(context.type[0])

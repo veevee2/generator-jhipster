@@ -37,6 +37,7 @@ function convertField(field) {
     name,
     type: field.type,
   });
+  jdlField.columnName = field.columnName;
   if (field.javadoc) {
     jdlField.comment = formatComment(field.javadoc);
   }

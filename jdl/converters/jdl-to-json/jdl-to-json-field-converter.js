@@ -56,6 +56,10 @@ function getConvertedFieldsForEntity(jdlEntity, jdlObject) {
       fieldName: camelCase(jdlField.name),
       fieldType: jdlField.type,
     };
+    const  columnName = jdlField.columnName;
+    if(columnName) {
+       fieldData.fieldNameAsDatabaseColumn = columnName;
+    }
     const comment = formatComment(jdlField.comment);
     if (comment) {
       fieldData.javadoc = comment;

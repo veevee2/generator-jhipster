@@ -197,6 +197,7 @@ public class <%= persistClass %> implements Serializable {
   <%_ } else if (databaseTypeNeo4j) { _%>
     @GeneratedValue(UUIDStringGenerator.class)
   <%_ } _%>
+    @Column(name = "<%- primaryKey.fields[0].id %>")
     private <%= primaryKey.type %> <%= primaryKey.name %>;
 
 <%_ } _%>
